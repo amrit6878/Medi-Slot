@@ -1,0 +1,147 @@
+.dash-reveal {
+  animation: dashDrop 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.chart .bar-wrap {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  min-width: 35px;
+}
+.chart .bar-wrap span {
+  animation: growBar 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: bottom;
+  transition:
+    filter 0.2s,
+    transform 0.2s;
+}
+.chart .bar-wrap:hover span,
+.chart .bar-wrap.active span {
+  filter: brightness(1.1);
+  transform: scaleX(1.12);
+}
+.chart .bar-wrap em {
+  position: absolute;
+  bottom: 28px;
+  background: #123257;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 9px;
+  font-style: normal;
+  white-space: nowrap;
+  z-index: 2;
+}
+.chart .bar-wrap.active em {
+  animation: tip 0.18s ease both;
+}
+.legend li {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 3px;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.legend li:hover,
+.legend .selected-legend {
+  background: #eef7ff;
+  transform: translateX(3px);
+}
+.donut {
+  transition: transform 0.4s ease;
+}
+.donut:hover {
+  transform: rotate(20deg);
+}
+.panel h3 a {
+  cursor: pointer;
+}
+.admin-result-count {
+  margin: -8px 30px 10px;
+  font-size: 11px;
+  color: #748195;
+}
+.doctor-table tr {
+  transition: background 0.2s;
+}
+.doctor-table tbody tr:hover {
+  background: #f7fbff;
+}
+.doctor-table .pill {
+  border: 0;
+  cursor: pointer;
+}
+.admin-edit label {
+  display: block;
+  font-size: 11px;
+  color: #6a798c;
+  margin: 11px 0;
+}
+.admin-edit input,
+.admin-edit select {
+  margin-top: 5px;
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #d8e3ed;
+  border-radius: 4px;
+}
+.schedule-save {
+  margin: 11px 0 0;
+}
+.saved-note {
+  color: #19905b;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0 0;
+}
+.delete-leave {
+  border: 0;
+  background: transparent;
+  color: #e94545;
+}
+.admin-appointments {
+  margin: 0 30px;
+}
+.approve {
+  color: #24945d;
+}
+.reject {
+  color: #e04444;
+}
+@keyframes dashDrop {
+  from {
+    opacity: 0;
+    transform: translateY(17px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes growBar {
+  from {
+    transform: scaleY(0.05);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes tip {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

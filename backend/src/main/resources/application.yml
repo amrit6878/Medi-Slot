@@ -1,0 +1,55 @@
+server:
+  port: 8081
+  servlet:
+    # The frontend calls /api/... and Vite proxies /api to this port unchanged.
+    context-path: /api
+
+spring:
+  application:
+    name: medi-slot-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/medislot_db}
+    username: postgres
+    password: Amrit@2004
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate:
+      # "update" creates/extends tables automatically. For production switch to "validate"
+      # and manage the schema with Flyway/Liquibase.
+      ddl-auto: ${DDL_AUTO:update}
+    properties:
+      hibernate:
+        format_sql: false
+  # schema.sql adds a partial unique index (one live appointment per slot) AFTER Hibernate
+  # has created the tables.
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+app:
+  timezone: Asia/Kolkata
+  # How many days ahead (including today) bookable slots are generated.
+  slot-horizon-days: 14
+  # Creates demo hospitals, doctors, hospital admins and employees on an empty database.
+  # Set to false in production.
+  seed-demo-data: ${SEED_DEMO_DATA:true}
+  jwt:
+    # MUST be overridden in every real environment (min. 32 characters).
+    secret: ${JWT_SECRET:my-medislot-secret-key-2026-change-this-1234567890}
+    expiration-minutes: 480
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173}
+  bootstrap:
+    # Created automatically if no super admin exists yet.
+    super-admin-name: Motherson Super Admin
+    super-admin-email: ${SUPER_ADMIN_EMAIL:superadmin@motherson.com}
+    super-admin-password: ${SUPER_ADMIN_PASSWORD:password123}
+
+logging:
+  level:
+    com.motherson.medislot: INFO
